@@ -43,9 +43,9 @@ function deck() {
     }
     return deck;
 }
-var testDeck = deck();
+var testDeck = [];
 
-console.log(testDeck);
+// console.log(testDeck);
 
 //---------------------------------------------------------------------------------
 
@@ -150,6 +150,7 @@ class Player {
 }
 
 let kevin = new Player();
+let house = new Player();
 
 
 
@@ -180,4 +181,33 @@ var testArray = [2, 5, 3, 7, 6, 9];
 testArray.findIndex(find);
 // result: 5
 */
+
+function rng(number,func1,func2){
+    /*
+    Pick number from 1 to 10. 
+    If number is within a range of numbers (Ex: 1 to 3), execute function
+    */
+    let num = Math.floor((Math.random()*10)+1);
+    if(num <= number){
+        func1;
+        console.log(num);
+        console.log("Lower");
+    }
+    else{
+        func2;
+        console.log(num);
+        console.log("Higher");
+    }
+}
+
+function newGame(array){
+    array.splice(0,array.length);
+    array.unshift(...deck());
+    kevin.hand = [];
+    house.hand = [];
+    for (let i = 0; i < 2; i++) {
+        kevin.hit(array);
+        house.hit(array);
+    }
+}
 
