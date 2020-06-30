@@ -15,6 +15,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------
 
+
 function deck() {
     /* 1.Make an empty array to put our 
     suits, value, and numbers in */
@@ -64,42 +65,14 @@ var testDeck = [];
 // }
 
 
-// function drawCard(handArray,deckArray){
-//     let hand = handArray;
-//     let deck = deckArray;
-//     let drawnCard = deckArray.shift();
-//     handArray.push(drawnCard["number"]);
-// }
-
-
-// class Player{
-//     constructor(){
-//         this.hand = [];
-//     }
-//     hit(deckArray) {
-//     let hand = this.hand;
-//     let deck = deckArray;
-//     let drawnCard = deckArray.shift();
-//     hand.push(drawnCard["number"]);
-//     }
-//     total(){
-//         let hand = this.hand;
-//         const add = (a,b)=>a+b;
-//         let total = hand.reduce(add);
-//         return total;
-//     }
-
-// }
-
-
-
-
 
 /*
 1. Do an ace check in the hand everytime we draw and put the card in the hand
 2. Initially treat the ace as an eleven
 3. If the card we draw will make the hand go over 21 and we have an ace, subtract 10 to the total hand value
 4. If we have an ace and the next card will make us hit 21 exactly or below 21, don't do anything
+
+NOT A GOOD IDEA. RESOLVED WITH A BETTER IDEA
 */ 
 
 class Player {
@@ -156,19 +129,7 @@ let house = new Player();
 
 
 
-// function drawCard(handArray, deckArray) {
-//     let hand = handArray;
-//     let deck = deckArray;
-//     let drawnCard = deckArray.shift();
-//     const ace = (ele) => ele == 11;
-//     let aceIdx = hand.findIndex(ace);
 
-//     if(hand.include(11) === true && drawnCard + total() > 21){
-//         hand[aceIdx] = 1;
-//         hand.push(drawnCard["number"]);
-//     } else{hand.push(drawnCard["number"]);}
-//     // handArray.push(drawnCard["number"]);
-// }
 
 /*
 
@@ -182,23 +143,24 @@ testArray.findIndex(find);
 // result: 5
 */
 
-function rng(number,func1,func2){
-    /*
-    Pick number from 1 to 10. 
-    If number is within a range of numbers (Ex: 1 to 3), execute function
-    */
-    let num = Math.floor((Math.random()*10)+1);
-    if(num <= number){
-        func1;
-        console.log(num);
-        console.log("Lower");
-    }
-    else{
-        func2;
-        console.log(num);
-        console.log("Higher");
-    }
-}
+// function rng(number,func1,func2){
+//     /*
+//     Pick number from 1 to 10. 
+//     If number is within a range of numbers (Ex: 1 to 3), execute function
+//     */
+//     let safetyNum = 16;
+//     let randomNum = Math.floor((Math.random()*10)+1);
+    // if(randomnum <= number){
+    //     func1;
+    //     console.log(num);
+    //     console.log("Lower");
+    // }
+//     else{
+//         func2;
+//         console.log(num);
+//         console.log("Higher");
+//     }
+// }
 
 function newGame(array){
     array.splice(0,array.length);
@@ -211,3 +173,30 @@ function newGame(array){
     }
 }
 
+
+
+
+function rng(number, func1, func2) {
+    /*
+    1. The AI will keep on hitting until it hits or goes over the safety number
+    2. Once the AI meets the safety number condition, it will make a decision whether or not to hit or not with a random num
+    3. Difficulty levels will be potentially based on the hit/stay ratio 
+    */
+    let safetyNum = 16;
+    let randomNum = Math.floor((Math.random() * 10) + 1);
+    if (house.total() < 16) {
+        func1;
+        console.log(num);
+    }else if(house.total() >= 16 && house.total() < 21){
+        if (randomnum <= number) {
+            func1;
+            console.log(num);
+            console.log("Lower");
+        } else {
+            func2;
+            console.log(num);
+            console.log("Lower");
+        }
+    }
+    
+}
